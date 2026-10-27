@@ -22,7 +22,6 @@ async function loadSongs() {
       const info = document.createElement("p");
       info.textContent = `${song.artist_name} · ${song.genre}`;
       const link = document.createElement("a");
-      // Дозволяємо лише звичайні вебпосилання.
       const url = new URL(song.listen_url);
       if (url.protocol === "http:" || url.protocol === "https:") {
         link.href = url.href;
