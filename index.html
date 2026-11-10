@@ -5,15 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Каталог пісень</title>
   <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <script type="module" src="app.js?v=2"></script>
 </head>
 <body>
   <main>
-    <h1>Каталог пісень</h1>
-    <p>Пісні та виконавці з нашого API.</p>
-    <button id="reload" type="button">Оновити список</button>
-    <p id="status" role="status" aria-live="polite"></p>
-    <ul id="songs"></ul>
+    <nav aria-label="Навігація">
+      <a href="#catalog">Каталог</a>
+      <a href="#add">Додати пісню</a>
+      <a id="login-link" href="#login" hidden>Увійти</a>
+      <a id="register-link" href="#register" hidden>Реєстрація</a>
+      <span id="user-name" hidden></span>
+      <button id="logout" type="button" hidden>Вийти</button>
+    </nav>
+    <p id="message" role="status" aria-live="polite"></p>
+
+    <noscript><p>Увімкніть JavaScript, щоб відкрити каталог.</p></noscript>
+    <section id="catalog">
+      <h1>Каталог пісень</h1>
+      <button id="reload" type="button">Оновити список</button>
+      <p id="catalog-status" role="status" aria-live="polite">Завантаження…</p>
+      <ul id="songs"></ul>
+    </section>
+
+    <section id="login" hidden>
+      <h1>Вхід</h1>
+      <form id="login-form">
+        <label>Ім’я користувача <input name="username" required maxlength="150" autocomplete="username"></label>
+        <label>Пароль <input name="password" type="password" required maxlength="128" autocomplete="current-password"></label>
+        <button>Увійти</button>
+      </form>
+    </section>
+
+    <section id="register" hidden>
+      <h1>Реєстрація</h1>
+      <form id="register-form">
+        <label>Ім’я користувача <input name="username" required maxlength="150" autocomplete="username"></label>
+        <label>Ім’я (необов’язково) <input name="first_name" maxlength="150" autocomplete="given-name"></label>
+        <label>Прізвище (необов’язково) <input name="last_name" maxlength="150" autocomplete="family-name"></label>
+        <label>Email <input name="email" type="email" required maxlength="254" autocomplete="email"></label>
+        <label>Пароль <input name="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password"></label>
+        <label>Повторіть пароль <input name="password_confirmation" type="password" required maxlength="128" autocomplete="new-password"></label>
+        <button>Зареєструватися</button>
+      </form>
+    </section>
+
+    <section id="add" hidden>
+      <h1>Додати пісню</h1>
+      <form id="song-form">
+        <label>Назва <input name="title" required maxlength="200"></label>
+        <label>Виконавець <select name="artist" required></select></label>
+        <label>Жанр <input name="genre" required maxlength="100"></label>
+        <label>Посилання <input name="listen_url" type="url" required maxlength="500"></label>
+        <button disabled>Додати</button>
+      </form>
+      <p id="artist-status" role="status"></p>
+    </section>
   </main>
 </body>
 </html>
